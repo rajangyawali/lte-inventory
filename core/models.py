@@ -152,6 +152,7 @@ class HouseOwnerInformation(models.Model):
 
     class Meta:
         verbose_name_plural = 'House Owner Information'
+        ordering = ['-owner_added_on']
 
     def __str__(self):
         return str(self.owner_name) + ' : Mobile Number ' + str(self.owner_mobile)
