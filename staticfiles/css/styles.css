@@ -10448,7 +10448,7 @@ h1 {
 }
 
 @media (max-width:767px) {
-    .nav {
+    .nav-item.active {
         display: none;
     }
 }
