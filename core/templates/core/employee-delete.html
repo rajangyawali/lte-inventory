@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block body %}
+        <br><br><br><br><br><br>
+        <div class="d-flex justify-content-center">
+            <h4>Are you sure to delete ?</h4>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+        <div class="row">
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Confirm</button> &nbsp;&nbsp;
+            </form>
+                <a href="{% url 'core:employees' %}"><button class="btn btn-danger">Cancel</button></a>
+        </div>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

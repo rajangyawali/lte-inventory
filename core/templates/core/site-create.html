@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% block body %}
+    <br>
+        <div class="col-md-12">
+            <h4>Add Site Information</h4>
+            <br>
+                <form method="POST"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Basic Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.site_id|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-4 mb-0">
+                                    {{ form.site_name|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.province|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.region|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.district|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ form.municipality|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.ward|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ form.address|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.latitude|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.longitude|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>NT Team Leader Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ team_lead_form.team|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>House Owner Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ owner_form.owner_name|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ owner_form.owner_address|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ owner_form.owner_mobile|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ owner_form.owner_landline|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ owner_form.key|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>BBU Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.bbu_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.bbu_serial_number|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.ubbp_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.ubbp_quantity|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.umpt_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.umpt_quantity|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.upeu_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.fan_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ baseband_form.bbu_manufacturer|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Transmission Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Transmission Type</th>
+                                        <th>Serial Number</th>
+                                        <th>Manufacturer</th>
+                                        <th>Number of SFPs</th>
+                                        <th/>
+                                        <th><i class="fas fa-trash alert-danger"></i></th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{ transmission_formset.management_form|crispy }}
+                                    {% for form in transmission_formset %}
+                                    <div class="form-row">
+                                        <tr>
+                                            {% for field in form %}
+                                            <td>
+                                                {% crispy_field field %}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                    </div>
+                                    {% endfor %}  
+                                </tbody>
+                            </table>                        
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>RRU Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>SRN</th>
+                                        <th>Band</th>
+                                        <th>Opt Range (MHz)</th>
+                                        <th>Gain</th>
+                                        <th>Configuration</th>
+                                        <th>Power</th>
+                                        <th>Serial No.</th>
+                                        <th>Manufacturer</th>
+                                        <th/>
+                                        <th><i class="fas fa-trash alert-danger"></i></th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{ radio_formset.management_form|crispy }}
+                                    {% for form in radio_formset %}
+                                    <div class="form-row">
+                                        <tr>
+                                            {% for field in form %}
+                                            <td>
+                                                {% crispy_field field %}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                    </div>
+                                    {% endfor %}  
+                                </tbody>
+                            </table>                        
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Antenna Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Sector ID</th>
+                                        <th>Serial Number</th>
+                                        <th>Manufacturer</th>
+                                        <th/>
+                                        <th><i class="fas fa-trash alert-danger"></i></th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{ antenna_formset.management_form|crispy }}
+                                    {% for form in antenna_formset %}
+                                    <div class="form-row">
+                                        <tr>
+                                            {% for field in form %}
+                                            <td>
+                                                {% crispy_field field %}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                    </div>
+                                    {% endfor %}  
+                                </tbody>
+                            </table>                        
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Rectifier Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ rectifier_form.rectifier_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ rectifier_form.rectifier_serial_number|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ rectifier_form.rectifier_module_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ rectifier_form.rectifier_installed_module|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ rectifier_form.rectifier_running_module|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ rectifier_form.rectifier_manufacturer|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Battery Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ battery_form.battery_model|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ battery_form.battery_banks|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ battery_form.battery_manufacturer|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-3 mb-0">
+                                    {{ battery_form.battery_added_by|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary" , name="button" value="Add Site"></form>
+                </div>
+                <div class="card">
+                    <div class="card">
+                    {% endblock %}

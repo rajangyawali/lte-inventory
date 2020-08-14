@@ -1,0 +1,30 @@
+{% load static %}
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-angle-left"></i></button>
+    <a class="navbar-brand" href="{% url 'home' %}">
+    <img src="{% static 'img/Telecom.ico'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Nepal Telecom</a>
+    
+    
+    <ul class="nav navbar-nav navbar-center">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}"><b> LTE Inventory Management System</b><span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+
+    <!-- Navbar-->
+    {% if user.is_authenticated %}
+    <ul class="navbar-nav ml-auto mr-md-0">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item">Welcome {{user.get_username}}</a>
+                <div class="dropdown-divider"></div>                  
+                      <a class="dropdown-item" href="{% url 'core:editProfile' %}">Edit Profile</a>
+                      <a class="dropdown-item" href="{% url 'core:changePassword' %}">Change Password</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>                 
+            </div>
+        </li>
+    </ul>
+    {% endif %} 
+</nav>

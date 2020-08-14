@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<br>
+<h2>House Owner Information</h2><br>
+<div class="col-md-3 offset-9">
+    <form method="GET">
+        <input type="text" class="form-control" name="q" placeholder="Search Owner/Site">
+    </form>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Mobile</th>
+            <th>Landline</th>
+            <th>Site ID</th>
+            <th>Key Information</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for owner in owners %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{owner.owner_name}}</td>
+            <td>{{owner.owner_address}}</td>
+            <td>{{owner.owner_mobile}}</td>
+            <td>{{owner.owner_landline}}</td>
+            <td>{{owner.site.site_id}}</td>
+            <td>{{owner.key}}</td>
+            <td>
+                <a href="{% url 'core:owner-edit' owner.id %}">&nbsp;&nbsp;&nbsp;<i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if owners.has_other_pages %}
+    <nav class="pagination-container">
+        <div class="pagination">
+            {% if  owners.has_previous %}
+                <a class="pagination-newer" href="?{% if query %}q={{query}}&{% endif %}page={{ owners.previous_page_number }}">PREV</a>
+            {% endif %}
+
+            {% for pages in page_range  %}
+                <span class="pagination-inner">
+                    {% if owners.number == pages %}
+                    <a class="pagination-active" href="#">{{pages}}</a>																
+                    {% else %}
+                        <a href="?{% if query %}q={{query}}&{% endif %}page={{pages}}">{{pages}}</a>
+                    {% endif %}
+                </span>							
+            {% endfor %}
+
+            {% if  owners.has_next %}
+                <a class="pagination-older" href="?{% if query %}q={{query}}&{% endif %}page={{ owners.next_page_number }}">NEXT</a>
+            {% endif %}
+        </div>
+    </nav>
+{% endif %}
+
+{% endblock body %}

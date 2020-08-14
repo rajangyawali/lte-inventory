@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% block body %}
+    <br>
+        <div class="col-md-12">
+            <h4>Edit House Owner</h4>
+            <br>
+                <form method="POST"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>House Owner Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.owner_name|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-4 mb-0">
+                                    {{ form.owner_address|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.owner_mobile|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.owner_landline|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-2 mb-0">
+                                    {{ form.key|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary" , name="button" value="Edit Owner"></form>
+                </div>
+                <div class="card">
+                    <div class="card">
+                    {% endblock %}

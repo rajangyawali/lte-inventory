@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<br>
+<a href="{% url 'core:employee-create' %}"><button class="btn btn-success" style="float:right;margin-right:10px">Add Team Leader</button></a>
+<h2>Team Leader Information</h2><br>
+<div class="col-md-3 offset-9">
+    <form method="GET">
+        <input type="text" class="form-control" name="q" placeholder="Search Team Leader Name/ID">
+    </form>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Mobile</th>
+            <th>Landline</th>
+            <th>ID</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{employee.employee_name}}</td>
+            <td>{{employee.employee_address}}</td>
+            <td>{{employee.employee_mobile}}</td>
+            <td>{{employee.employee_landline}}</td>
+            <td>{{employee.employee_id}}</td>
+            <td>
+                <a href="{% url 'core:employee-edit' employee.employee_id %}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'core:employee-delete' employee.employee_id %}"><i class="fas fa-trash alert-danger"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if employees.has_other_pages %}
+    <nav class="pagination-container">
+        <div class="pagination">
+            {% if  employees.has_previous %}
+                <a class="pagination-newer" href="?{% if query %}q={{query}}&{% endif %}page={{ employees.previous_page_number }}">PREV</a>
+            {% endif %}
+
+            {% for pages in page_range  %}
+                <span class="pagination-inner">
+                    {% if employees.number == pages %}
+                    <a class="pagination-active" href="#">{{pages}}</a>																
+                    {% else %}
+                        <a href="?{% if query %}q={{query}}&{% endif %}page={{pages}}">{{pages}}</a>
+                    {% endif %}
+                </span>							
+            {% endfor %}
+
+            {% if  employees.has_next %}
+                <a class="pagination-older" href="?{% if query %}q={{query}}&{% endif %}page={{ employees.next_page_number }}">NEXT</a>
+            {% endif %}
+        </div>
+    </nav>
+{% endif %}
+
+{% endblock body %}

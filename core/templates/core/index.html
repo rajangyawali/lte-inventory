@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+
+<h2>LTE Sites</h2><br>
+<div class="col-md-3 offset-9">
+    <form method="GET">
+        <input type="text" class="form-control" name="site" placeholder="Search Site ID/Site Name">
+    </form>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>Site ID</th>
+            <th>Site Name</th>
+            <th>Province</th>
+            <th>Region</th>
+            <th>District</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for site in sites %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{site.site_id}}</td>
+            <td>{{site.site_name}}</td>
+            <td>{{site.province}}</td>
+            <td>{{site.region}}</td>
+            <td>{{site.district}}</td>
+            <td><a href="{% url 'core:site-detail' site.site_id %}"><i class="fas fa-eye alert-primary"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'core:site-edit' site.site_id %}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'core:site-delete' site.site_id %}""><i class="fas fa-trash alert-danger"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if sites.has_other_pages %}
+    <nav class="pagination-container">
+        <div class="pagination">
+            {% if  sites.has_previous %}
+                <a class="pagination-newer" href="?{% if query %}q={{query}}&{% endif %}page={{ sites.previous_page_number }}">PREV</a>
+            {% endif %}
+
+            {% for pages in page_range  %}
+                <span class="pagination-inner">
+                    {% if sites.number == pages %}
+                    <a class="pagination-active" href="#">{{pages}}</a>																
+                    {% else %}
+                        <a href="?{% if query %}q={{query}}&{% endif %}page={{pages}}">{{pages}}</a>
+                    {% endif %}
+                </span>							
+            {% endfor %}
+
+            {% if  sites.has_next %}
+                <a class="pagination-older" href="?{% if query %}q={{query}}&{% endif %}page={{ sites.next_page_number }}">NEXT</a>
+            {% endif %}
+        </div>
+    </nav>
+{% endif %}
+
+{% endblock body %}

@@ -1,0 +1,313 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+<br>
+<h2>{{ site.site_name }}</h2>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>Basic Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <b>Site ID :</b> {{ site.site_id }}
+            </div>
+            <div class="col-md-4">
+                <b>Site Name :</b> {{ site.site_name }}
+            </div>
+            <div class="col-md-2">
+                <b>Province :</b> {{ site.province }}
+            </div>
+            <div class="col-md-2">
+                <b>Region :</b> {{ site.region }}
+            </div>
+            <div class="col-md-2">
+                <b>District :</b> {{ site.district }}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <b>Municipality/Rural Municipality :</b> {{ site.municipality }}
+            </div>
+            <div class="col-md-2">
+                <b>Ward No :</b> {{ site.ward }}
+            </div>
+            <div class="col-md-4">
+                <b>Address :</b> {{ site.address }}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <b>Latitude :</b> {{ site.latitude }}
+            </div>
+            <div class="col-md-3">
+                <b>Longitude :</b> {{ site.longitude }}
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<br>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>NT Team Leader Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <b>Name :</b> {{ team_lead.team.employee_name }}
+            </div>
+            <div class="col-md-3">
+                <b>Address :</b> {{ team_lead.team.employee_address }}
+            </div>
+            <div class="col-md-2">
+                <b>Mobile No :</b> {{ team_lead.team.employee_mobile }}
+            </div>
+            <div class="col-md-2">
+                <b>Landline No :</b> {{ team_lead.team.employee_landline }}
+            </div>
+            <div class="col-md-2">
+                <b>Employee ID :</b> {{ team_lead.team.employee_id }}
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>House Owner Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <b>Name :</b> {{ house_owner.owner_name }}
+            </div>
+            <div class="col-md-3">
+                <b>Address :</b> {{ house_owner.owner_address }}
+            </div>
+            <div class="col-md-2">
+                <b>Mobile No :</b> {{ house_owner.owner_mobile }}
+            </div>
+            <div class="col-md-2">
+                <b>Landline No :</b> {{house_owner.owner_landline }}
+            </div>
+            <div class="col-md-2">
+                <b>Key :</b> {{ house_owner.key }}
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>BBU Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <b>BBU Model :</b> {{ baseband_equipment.bbu_model }}
+            </div>
+            <div class="col-md-3">
+                <b>BBU Serial Number :</b> {{ baseband_equipment.bbu_serial_number }}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <b>UBBP Model :</b> {{ baseband_equipment.ubbp_model }}
+            </div>
+            <div class="col-md-3">
+                <b>Quantity :</b> {{ baseband_equipment.ubbp_quantity }}
+            </div>
+            <div class="col-md-3">
+                <b>UMPT Model :</b> {{ baseband_equipment.umpt_model }}
+            </div>
+            <div class="col-md-3">
+                <b>Quantity :</b> {{ baseband_equipment.umpt_quantity }}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <b>UPEU Model :</b> {{ baseband_equipment.upeu_model }}
+            </div>
+            <div class="col-md-3">
+                <b>Fan Model :</b> {{ baseband_equipment.fan_model }}
+            </div>
+            <div class="col-md-3">
+                <b>Manufacturer :</b> {{ baseband_equipment.bbu_manufacturer }}
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>Transmission Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Equipment Model</th>
+                        <th>Transmission Type</th>
+                        <th>Serial Number</th>
+                        <th>Manufacturer</th>
+                        <th>Number of SFPs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equipment in transmission_equipments %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ equipment.te_model }}</td>
+                        <td>{{ equipment.te_transmission_type }}</td>
+                        <td>{{ equipment.te_serial_number }}</td>
+                        <td>{{ equipment.te_manufacturer }}</td>
+                        <td>{{ equipment.te_sfps_number }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>RRU Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>RRU Model</th>
+                        <th>Subrack No.</th>
+                        <th>Band</th>
+                        <th>Operating Range (MHz)</th>
+                        <th>Gain</th>
+                        <th>Configuration</th>
+                        <th>Power</th>
+                        <th>Serial No.</th>
+                        <th>Manufacturer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equipment in radio_equipments %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ equipment.radio_model }}</td>
+                        <td>{{ equipment.radio_subrack_number }}</td>
+                        <td>{{ equipment.radio_band }}</td>
+                        <td>{{ equipment.radio_operating_range }}</td>
+                        <td>{{ equipment.radio_gain }}</td>
+                        <td>{{ equipment.radio_configuration }}</td>
+                        <td>{{ equipment.radio_power }}W</td>
+                        <td>{{ equipment.radio_serial_number }}</td>
+                        <td>{{ equipment.radio_manufacturer }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>Antenna Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Antenna Model</th>
+                        <th>Sector ID</th>
+                        <th>Serial Number</th>
+                        <th>Manufacturer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equipment in antenna_equipments%}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ equipment.antenna_model }}</td>
+                        <td>{{ equipment.antenna_sector_id }}</td>
+                        <td>{{ equipment.antenna_serial_number }}</td>
+                        <td>{{ equipment.antenna_manufacturer }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>Rectifier Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <b>Rectifier Model :</b> {{ rectifier_equipment.rectifier_model }}
+            </div>
+            <div class="col-md-4">
+                <b>Rectifier Serial Number :</b> {{ rectifier_equipment.rectifier_serial_number }}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <b>Rectifier Module Model :</b> {{ rectifier_equipment.rectifier_module_model }}
+            </div>
+            <div class="col-md-2">
+                <b>Installed Modules :</b> {{ rectifier_equipment.rectifier_installed_module }}
+            </div>
+            <div class="col-md-2">
+                <b>Running Modules :</b> {{ rectifier_equipment.rectifier_running_module }}
+            </div>
+            <div class="col-md-2">
+                <b>Manufacturer:</b> {{ rectifier_equipment.rectifier_manufacturer }}
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h4>Battery Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <b>Battery Model :</b> {{ battery_equipment.battery_model }}
+            </div>
+            <div class="col-md-2">
+                <b>Banks :</b> {{ battery_equipment.battery_banks }}
+            </div>
+            <div class="col-md-2">
+                <b>Manufacturer :</b> {{ battery_equipment.battery_manufacturer }}
+            </div>
+            <div class="col-md-3">
+                <b>Added By :</b> {{ battery_equipment.battery_added_by }}
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="card">
+    <div class="card">
+        {% endblock body %}
