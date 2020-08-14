@@ -1,11 +1,12 @@
 {% extends 'base.html' %} {% load static %} {% block body %}
 <br>
 <h2>House Owner Information</h2><br>
-<div class="col-md-3 offset-9">
+<div class="col-md-3">
     <form method="GET">
         <input type="text" class="form-control" name="q" placeholder="Search Owner/Site">
     </form>
 </div>
+<div class="table-responsive-sm">
 <table class="table table-striped">
     <thead>
         <tr>
@@ -36,7 +37,7 @@
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 {% if owners.has_other_pages %}
     <nav class="pagination-container">
         <div class="pagination">
@@ -60,5 +61,6 @@
         </div>
     </nav>
 {% endif %}
-
+<div class="card">
+<div class="card">
 {% endblock body %}

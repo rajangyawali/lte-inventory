@@ -1,12 +1,13 @@
 {% extends 'base.html' %} {% load static %} {% block body %}
 
 <h2>LTE Sites</h2><br>
-<div class="col-md-3 offset-9">
+<div class="col-md-3">
     <form method="GET">
         <input type="text" class="form-control" name="site" placeholder="Search Site ID/Site Name">
     </form>
 </div>
-<table class="table table-striped">
+<div class ="table-responsive-sm">
+<table class="table">
     <thead>
         <tr>
             <th>SN</th>
@@ -35,7 +36,7 @@
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 {% if sites.has_other_pages %}
     <nav class="pagination-container">
         <div class="pagination">
@@ -59,5 +60,6 @@
         </div>
     </nav>
 {% endif %}
-
+<div class="card">
+<div class="card">
 {% endblock body %}

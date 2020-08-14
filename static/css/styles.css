@@ -10446,3 +10446,9 @@ h1 {
 .pagination-older {
     margin-left: 20px;
 }
+
+@media (max-width:767px) {
+    .nav {
+        display: none;
+    }
+}
